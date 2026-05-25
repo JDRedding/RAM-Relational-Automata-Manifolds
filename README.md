@@ -50,12 +50,3 @@ CA-Extensions-RDG-MFE-Q/
 │
 └── LICENSE
 ```
-
-
-
-
----
-
-## License
-
-MIT or Apache‑2.0 recommended.
