@@ -18,7 +18,7 @@ RDG–MFE–Q provides geometry, dynamics, and admissibility as *separate, compo
 
 ---
 
-## Repository Structure
+## Future Repository Structure
 
 ```
 CA-Extensions-RDG-MFE-Q/
