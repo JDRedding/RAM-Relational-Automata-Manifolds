@@ -4,6 +4,11 @@ RDG–MFE–Q: Extends and strictly generalizes Conway's Game of Life and Wolfra
 
 RDG–MFE–Q is a three-layer generalization that treats Conway's Game of Life and Wolfram-style elementary CA as special cases (fixed-grid, lookup-table, unconstrained).
 
+Figure 1. Transition from classical cellular automata to Relational Automata Manifolds (RAM).  
+(a) Conway’s Game of Life glider on a fixed lattice.  
+(b) RDG evolution from a random relational graph (Γ₀) to a quasi‑grid manifold (Γ*).  
+(c) Life glider instantiated on the RDG‑induced manifold, demonstrating automata on emergent geometry.
+
 Accurate Mapping to Known Systems
 Reduction is formally:
 
