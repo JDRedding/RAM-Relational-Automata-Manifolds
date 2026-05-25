@@ -1,4 +1,4 @@
-# RAM-Relational-Automata-Manifolds
+# RAM : Relational Automata Manifolds
 ## RDG–MFE–Q: Generalized Cellular Automata  
 *A strict extension of Conway’s Life, Wolfram CA, graph CA, asynchronous CA, and constrained CA*
 
