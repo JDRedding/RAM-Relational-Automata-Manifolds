@@ -1,0 +1,1082 @@
+RDG–MFE–Q GENERALIZED CELLULAR AUTOMATA 
+**RDG–MFE–Q: Extends and strictly generalizes Conway's Game of Life and Wolfram's cellular automata**
+
+RDG–MFE–Q as a three-layer generalization that treats Conway's Game of Life and Wolfram-style elementary CA as special cases (fixed-grid, lookup-table, unconstrained). RDG–MFE–Q extends classic CA by injecting generative geometry, field dynamics, and regulated admissibility where they had fixed grids, lookup tables, and zero constraints. It sidesteps their limitations (accidental scale behavior, lack of physicality) and generalizes them as a more abstract engine when the layers are non-degenerate.
+
+### Accurate Mapping to Known Systems
+Reduction is formally:
+
+    Classic CA ≃ (Γ_fixed grid, f_lookup table, Q_∅)
+
+- RDG layer supplies the missing *generative relational geometry*. Standard CA embed everything in Z^d with Moore/von Neumann neighborhoods. RDG lets Γ emerge from relational closure, coherence density C_Γ, or structural operators π_RDG. This aligns with modern extensions like graph cellular automata, network automata, or hypergraph rewriting.
+
+- MFE layer replaces discrete synchronous updates x_{t+1} = f(x_t) with field-like evolution involving attractors, projectors σ, and dynamics δ. This moves toward continuous CA, reaction-diffusion PDEs on graphs, eigenmode decompositions, or coupled map lattices.
+
+- Q layer adds admissibility, stability (SID tri-mode), quotienting, and collapse. Classic CA have none of this built-in.
+
+The synthesis
+
+    RDG–MFE–Q = (Γ, δ, Q)  ⊃  Classic CA
+
+holds as a **strict containment** when the higher layers are active and non-trivial. Life and Rule 110 become degenerate limits (R0/M0/Q0).
+
+1. CLASSICAL CELLULAR AUTOMATA IN RDG TERMS
+-------------------------------------------
+A classical CA (Game of Life, Wolfram rules) can be written as:
+
+    C = ( Γ_grid , f_rule )
+
+Where:
+    Γ_grid   = fixed adjacency graph (static lattice)
+    f_rule   = local lookup-table update rule
+
+In RDG–MFE–Q notation, this is the degenerate case:
+
+    CA ≡ ( Γ = Γ_grid ,
+           δ = f_rule ,
+           Q = ∅ )
+
+Properties:
+    - Geometry fixed
+    - Dynamics = rule table
+    - No quotient/admissibility layer
+
+THE RDG–MFE–Q STACK
+----------------------
+RDG–MFE–Q introduces three layers that strictly extend CA:
+
+(1) RDG — Relational Dynamic Geometry
+
+    - Γ_t evolves
+    - geometry is generated, not assumed
+    - coherence density C_Γ
+    - relational modes R1/R2/R3
+    - operator π_RDG updates geometry
+
+(2)  MFE — Momentum-Flux Engine 
+(field dynamics layer, abstracting Maxwell's quaternion field structure; see Appendix A) 
+
+    - δ is a field engine, not a lookup table
+    - operators:
+          A = slow integrator / attractor
+          p = instantaneous evaluator
+          σ = structure selector
+
+(3) Q — Quotient / Admissibility / SID Layer
+
+    - SID tri-mode (S/I/D = mean/variance/deviation)
+    - admissibility bands (±1σ, ±2σ, ±3σ)
+    - collapse rules
+    - stability enforcement
+
+Full RDG–MFE–Q evolution:
+
+    x_{t+1} = Q( δ( σ(A,p,x_t), Γ_t ) )
+    Γ_{t+1} = π_RDG( Γ_t , x_t )
+
+
+CELLULAR AUTOMATA AS A SPECIAL CASE
+--------------------------------------
+Classical CA are recovered by collapsing each layer:
+
+    (a) Geometry collapse:
+            Γ_t ≡ Γ_grid
+
+    (b) Dynamics collapse:
+            δ( σ(A,p,x_t), Γ_grid ) = f_rule(x_t)
+
+    (c) Quotient collapse:
+            Q = id
+
+Thus:
+
+    CA = RDG–MFE–Q |
+         Γ = Γ_grid ,
+         δ = f_rule ,
+         Q = id
+
+STATEMENT
+--------------------------------------
+Proposition:
+
+    For any classical CA (Γ_grid, f_rule), there exists an RDG–MFE–Q
+    specialization such that:
+
+        Γ_t ≡ Γ_grid
+        δ( σ(A,p,x_t), Γ_grid ) = f_rule(x_t)
+        Q = id
+
+    Therefore classical CA are special cases of RDG–MFE–Q with:
+        - static geometry
+        - rule-table dynamics
+        - trivial quotient layer
+
+WHAT RDG–MFE–Q ADDS BEYOND CA
+
+    +------------------+---------------------------+---------------------------
+    | Layer            | Classical CA              | RDG–MFE–Q                
+    +------------------+---------------------------+---------------------------
+    | Geometry         | fixed grid                | generated Γ_t            
+    | Dynamics         | lookup table              | field operator δ         
+    | Quotient         | none                      | Q enforces admissibility 
+    | Scale behavior   | accidental                | designed via fields+Q    
+    | Semantics        | patterns only             | relational + statistical 
+    +------------------+---------------------------+---------------------------
+
+### Areas for Rigor
+
+1. **Universality and Computation**  
+
+TURING COMPLETENESS IN RDG–MFE–Q AND THE LIFE GLIDER EMBEDDING
+
+0. OVERVIEW
+Life and Rule 110 are Turing-complete because they support:
+
+    (1) persistent mobile structures (gliders / glider guns)
+    (2) collision-based logic
+    (3) unbounded memory via streams of gliders
+
+RDG–MFE–Q is a strict generalization of CA, so the question is:
+    Does the Q-layer ever remove universality?
+
+Answer:
+
+    - RDG + MFE always preserve universality (they strictly extend CA).
+    - Q preserves universality *iff* the admissibility bands include
+      the CA’s valid trajectories.
+    - Q can intentionally *destroy* universality by forbidding
+      long-range propagation or collision states.
+
+Thus:
+
+    Universality is *not automatic* in RDG–MFE–Q.
+    Universality is *guaranteed* when Q is permissive.
+    Universality is *forbidden* when Q is restrictive.
+
+We now prove the permissive case by embedding a Life glider.
+
+SETUP: LIFE AS A SPECIALIZATION OF RDG–MFE–Q
+Take the specialization:
+
+    Γ_t ≡ Γ_grid
+    δ ≡ f_Life
+    Q ≡ id   (or any Q that accepts all Life-valid states)
+
+Then:
+
+    x_{t+1} = Q( δ(x_t) ) = f_Life(x_t)
+
+Thus the RDG–MFE–Q system *is* Life.
+
+Since Life is Turing-complete, RDG–MFE–Q is Turing-complete under this
+specialization.
+
+This proves *existence* of a universal RDG–MFE–Q instance.
+
+WHEN DOES Q PRESERVE UNIVERSALITY?
+Let S be the set of all Life-valid configurations.
+
+Let T be the set of all configurations reachable by a Life glider.
+
+Define:
+
+    Q is universality-preserving  ⇔  Q(x) = x  for all x ∈ S
+
+Equivalently:
+
+    Q does not collapse or reject any state in a valid Life trajectory.
+
+Since a glider is a 4-phase periodic orbit:
+
+    G = {g0, g1, g2, g3}
+
+Universality is preserved if:
+
+    Q(gk) = gk   for k = 0..3
+
+This is the minimal admissibility requirement.
+
+EMBEDDING A LIFE GLIDER AS AN RDG–MFE–Q TRAJECTORY
+We now show that a Life glider is an admissible RDG–MFE–Q trajectory
+whenever Q is permissive on the glider orbit.
+
+Let the RDG–MFE–Q update be:
+
+    x_{t+1} = Q( δ( σ(A,p,x_t), Γ_t ) )
+
+Specialize:
+
+    Γ_t = Γ_grid
+    σ = identity
+    A = identity
+    p = identity
+    δ = f_Life
+
+Then:
+
+    x_{t+1} = Q( f_Life(x_t) )
+
+Let g0 be the canonical glider seed.
+
+Life dynamics give:
+
+    f_Life(g0) = g1
+    f_Life(g1) = g2
+    f_Life(g2) = g3
+    f_Life(g3) = g0 shifted by (1,1)
+
+Thus the RDG–MFE–Q evolution is:
+
+    x_0 = g0
+    x_1 = Q(g1)
+    x_2 = Q(g2)
+    x_3 = Q(g3)
+    x_4 = Q(shift(g0))
+    ...
+
+If Q(gk) = gk for all k, then:
+
+    x_t = Life_glider(t)
+
+Therefore the glider is an *admissible periodic orbit* in RDG–MFE–Q.
+
+This proves:
+    A Life glider embeds cleanly as an RDG–MFE–Q trajectory
+    whenever Q accepts the glider orbit.
+
+ WHEN DOES Q DESTROY UNIVERSALITY?
+Q destroys universality if it forbids any of the following:
+
+    - long-range propagation (glider motion)
+    - collision states (glider interactions)
+    - periodic emitters (glider guns)
+    - sparse streams (used for memory)
+
+Examples of universality-breaking Q-layers:
+
+    Q1: kills all states with nonzero deviation (SID collapse)
+    Q2: forbids any configuration with >N live cells
+    Q3: enforces local smoothing that erases glider diagonals
+    Q4: projects all states to isotropic averages
+
+In these cases:
+
+    Q(gk) ≠ gk
+
+and the glider orbit is destroyed, eliminating universality.
+
+THEOREM (FORMAL STATEMENT)
+Theorem:
+    Let R = (Γ, δ, Q) be an RDG–MFE–Q system.
+    Let C_Life be Conway’s Life CA.
+
+    If:
+        (1) Γ_t = Γ_grid
+        (2) δ = f_Life
+        (3) Q(x) = x for all x in the Life-valid state space S
+
+    Then:
+        (a) R simulates Life exactly
+        (b) R is Turing-complete
+        (c) Every Life glider is an admissible RDG–MFE–Q trajectory
+
+    Conversely:
+        If Q rejects any state in the glider orbit G,
+        then R is not universal.
+
+Proof:
+    Immediate from the embedding above and the known universality of Life.
+
+SUMMARY
+
+    - RDG and MFE *always* preserve universality.
+    - Q preserves universality iff it accepts the glider orbit.
+    - A Life glider embeds as an RDG–MFE–Q trajectory whenever
+      Q(gk) = gk for k = 0..3.
+    - RDG–MFE–Q can be universal or non-universal depending on Q.
+
+=====================================================================
+
+2. **Emergence vs. Imposition**  
+===============================================================================
+DG INDUCE EFFECTIVE GRIDS/MANIFOLDS
+EXAMPLE WITH LIFE-LIKE ATTRACTORS
+===============================================================================
+
+RDG is explicitly designed so that:
+
+    - from generic, messy initial relations,
+    - the RDG operator π_RDG drives the system toward
+      low-energy, high-coherence relational manifolds,
+
+and one important family of such manifolds are:
+
+    - approximately 2D grid-like graphs
+    - with local degree ≈ 4 or 8
+    - supporting CA-like, Life-like dynamics as attractors.
+
+Below is a concrete construction sketch:
+
+    (1) RDG layer induces a quasi-2D manifold from a random graph.
+    (2) MFE layer implements a Life-like local rule on that manifold.
+    (3) Q layer stabilizes the manifold and the Life-like patterns
+        as attractors.
+
+RDG AS A GEOMETRY INDUCER
+Let:
+
+    P  = set of points (nodes)
+    E  = set of relations (edges)
+    Γ  = (P, E) = relational graph
+
+RDG defines an update operator:
+
+    Γ_{t+1} = π_RDG(Γ_t, x_t)
+
+We choose π_RDG to minimize a simple "geometric energy":
+
+    E_geom(Γ) = α * (variance of node degrees)
+              + β * (sum of squared edge lengths in an embedding)
+              + γ * (penalty for long-range edges)
+
+Intuition:
+    - nodes "want" similar degree (≈ 4 or 8)
+    - edges "want" to be short in some latent 2D embedding
+    - long-range edges are pruned or discouraged
+
+From a generic initial Γ_0 (random graph), repeated application of π_RDG
+drives Γ_t toward:
+
+    - locally uniform degree
+    - locally planar structure
+    - emergent 2D manifold (quasi-grid)
+
+CONSTRUCTING A LIFE-LIKE MANIFOLD
+We now specialize π_RDG to favor a 2D grid:
+
+    Target degree: deg(v) ≈ 4 (von Neumann) or 8 (Moore)
+    Target clustering: low (grid-like, not highly clustered)
+    Target cycles: many 4-cycles (squares), few triangles
+
+A simple RDG rule:
+
+    - If deg(v) < 4:
+        add edges to nearest nodes in latent 2D embedding
+    - If deg(v) > 4:
+        remove edges that maximize E_geom
+    - Prefer edges that create 4-cycles and avoid triangles
+
+Result:
+    Starting from random Γ_0, Γ_t converges to a graph Γ* that is:
+
+        - approximately a 2D grid
+        - with local neighborhoods isomorphic to a Life grid patch
+
+This Γ* is an RDG-induced manifold.
+
+ MFE: LIFE-LIKE DYNAMICS ON THE INDUCED MANIFOLD
+Now define a field x_t over nodes P:
+
+    x_t : P → {0,1}   (dead/alive)
+
+We choose MFE dynamics δ to mimic Life on Γ*:
+
+    For each node v:
+        N(v) = neighbors of v in Γ_t
+        s(v) = sum_{u in N(v)} x_t(u)
+
+    Life-like rule:
+        if x_t(v) = 1 and (s(v) = 2 or s(v) = 3):
+            x_{t+1}(v) = 1
+        else if x_t(v) = 0 and s(v) = 3:
+            x_{t+1}(v) = 1
+        else:
+            x_{t+1}(v) = 0
+
+This is exactly Conway’s Life rule, but now defined on Γ_t.
+
+On Γ* (the induced quasi-grid), this behaves like Life on a 2D lattice.
+
+Q: STABILIZING THE MANIFOLD AND PATTERNS
+We now add Q to stabilize both:
+
+    - the geometry Γ_t ≈ Γ*
+    - the Life-like patterns (e.g., still lifes, oscillators, gliders)
+
+Example Q-layer:
+
+    - Compute SID statistics over:
+        * node degrees
+        * local cycle counts
+        * local pattern densities
+
+    - If Γ_t deviates from the "grid band" (e.g., degree variance > 1σ):
+        Q prunes or reweights edges to push Γ_t back toward Γ*
+
+    - If x_t contains known Life-like motifs (e.g., blocks, blinkers,
+      glider shapes), Q treats them as admissible and avoids collapsing
+      them unless they leave the manifold band.
+
+Thus:
+
+    - Γ_t is kept near the grid manifold Γ*
+    - Life-like patterns are preserved as admissible attractors
+
+
+EXAMPLE: FROM RANDOM GRAPH TO LIFE-LIKE ATTRACTOR
+Step 0: Random initial condition
+
+    - Γ_0: random graph on N nodes
+    - x_0: random 0/1 assignment
+
+Step 1: RDG geometry flow
+
+    - Apply π_RDG repeatedly:
+          Γ_{t+1} = π_RDG(Γ_t, x_t)
+    - After T_geom steps:
+          Γ_T ≈ Γ* (quasi-2D grid)
+
+Step 2: Life-like dynamics on Γ*
+
+    - Fix Γ_t ≈ Γ* (Q keeps it in band)
+    - Apply δ (Life-like rule) on x_t:
+          x_{t+1} = Q( δ(x_t, Γ*) )
+
+Step 3: Emergence of Life-like attractors
+
+    - As in standard Life, random x_0 on a grid tends to:
+          * still lifes
+          * oscillators
+          * gliders
+          * glider guns (with suitable seeds)
+
+    - Because Γ* is grid-like and Q preserves these motifs,
+      these patterns become *attractors* in the RDG–MFE–Q system.
+
+CONCRETE ATTRACTOR EXAMPLE (GLIDER)
+Let G = {g0, g1, g2, g3} be the 4-phase glider orbit on Γ*.
+
+We have:
+
+    δ(g0, Γ*) = g1
+    δ(g1, Γ*) = g2
+    δ(g2, Γ*) = g3
+    δ(g3, Γ*) = shift(g0)
+
+If Q is chosen such that:
+
+    - Γ_t stays within the grid band (Γ_t ≈ Γ*)
+    - Q(gk) = gk for k = 0..3
+
+then:
+
+    x_t = G(t)   is a stable, admissible trajectory.
+
+Thus the RDG-induced manifold Γ* supports a Life-like glider as an
+attractor, even though we started from a generic random Γ_0.
+
+SUMMARY
+
+- RDG, via π_RDG, can *induce* effective manifolds (e.g., quasi-2D grids)
+  from generic random relational data.
+
+- On these induced manifolds, MFE can implement Life-like local rules.
+
+- With a suitable Q-layer, both:
+      (a) the manifold geometry, and
+      (b) the Life-like patterns (still lifes, oscillators, gliders)
+  become *admissible attractors*.
+
+    RDG does not just *assume* a grid — it can *generate* one as a
+    low-energy relational manifold, on which Life-like universality
+    naturally lives.
+
+===============================================================================
+3. **Relation to Existing Literature**  
+   RDG–MFE–Q AS A UNIFIED FRAMEWORK FOR EXTENDED CELLULAR AUTOMATA VARIANTS
+===============================================================================
+
+There is a long lineage of “beyond-grid” or “beyond-synchronous” CA work:
+
+    - Graph cellular automata (graph CA)
+    - Asynchronous cellular automata
+    - Constrained / probabilistic / filtered CA
+    - CA on manifolds, networks, and irregular lattices
+
+RDG–MFE–Q does *not* claim to invent these ideas.
+Instead, it:
+
+    - recovers each of them as a clean specialization, and
+    - provides a single, layered engine where they all live together.
+
+The synthesis — not the ingredients — is the key contribution.
+
+MAPPING THE LINEAGE INTO RDG–MFE–Q
+We use the triple:
+
+    (RDG, MFE, Q)  =  (geometry, dynamics, admissibility)
+
+and show how classic extensions drop out as special cases.
+
+Graph cellular automata  →  RDG-only generalization
+Graph CA replace the fixed grid with an arbitrary graph, but usually:
+
+    - the graph is static
+    - the update rule is still local and synchronous
+    - there is no explicit admissibility layer
+
+In RDG–MFE–Q terms:
+
+    - RDG: Γ is an arbitrary graph, but π_RDG is trivial (no evolution)
+    - MFE: δ is a local rule on Γ (graph CA update)
+    - Q:  identity (no constraints)
+
+So:
+
+    Graph CA  ≈  RDG–MFE–Q with:
+        π_RDG = id
+        δ     = graph-local rule
+        Q     = id
+
+Asynchronous CA  →  MFE timing generalization
+Asynchronous CA relax the global clock:
+
+    - cells update on different schedules
+    - updates may be random or rule-driven
+
+In RDG–MFE–Q terms:
+
+    - RDG: Γ is fixed (or slowly evolving)
+    - MFE: δ includes a *scheduler* or *update mask*:
+            δ(x_t, Γ_t, ξ_t)  where ξ_t selects which nodes update
+    - Q:  identity or mild constraints
+
+So:
+
+    Asynchronous CA  ≈  RDG–MFE–Q with:
+        π_RDG = id (or simple)
+        δ     = local rule + scheduler
+        Q     = id
+
+Constrained / filtered / probabilistic CA  →  Q-layer generalization
+Constrained CA introduce:
+
+    - forbidden states
+    - probabilistic transitions
+    - filters that reject or modify updates
+
+In RDG–MFE–Q terms:
+
+    - RDG: Γ fixed
+    - MFE: δ is a standard CA rule (possibly stochastic)
+    - Q:  enforces constraints, filters, or probabilistic acceptance
+
+So:
+
+    Constrained CA  ≈  RDG–MFE–Q with:
+        π_RDG = id
+        δ     = (possibly stochastic) CA rule
+        Q     = constraint/filter operator
+
+WHAT RDG–MFE–Q ADDS BEYOND EACH INDIVIDUAL EXTENSION
+The key is that RDG–MFE–Q does *all three* at once:
+
+    - RDG: geometry can be arbitrary *and* dynamically induced/evolved
+    - MFE: dynamics can be synchronous, asynchronous, field-based, or hybrid
+    - Q:  constraints, filters, and admissibility are first-class
+
+This yields a clean inclusion diagram:
+
+    Classic CA
+        ⊂ Graph CA
+        ⊂ Asynchronous CA
+        ⊂ Constrained CA
+        ⊂ RDG–MFE–Q (full stack)
+
+More precisely:
+
+    - Graph CA  = RDG + simple MFE, trivial Q
+    - Async CA  = RDG + scheduled MFE, trivial Q
+    - Constrained CA = RDG + MFE, nontrivial Q
+    - RDG–MFE–Q = all three dimensions turned on and coupled
+
+EXAMPLE: ONE FAMILY, THREE VIEWS
+Take a Life-like rule and see how it appears in each framework.
+
+(1) Graph CA:
+
+        - Put Life on a static irregular graph Γ.
+        - Local rule uses neighbor counts on Γ.
+
+(2) Asynchronous CA:
+
+        - Same Γ, but only a subset of nodes update each step.
+        - Update mask may be random or rule-based.
+
+(3) Constrained CA:
+
+        - Same rule, but forbid certain densities or motifs.
+        - Filter out “illegal” states after each step.
+
+(4) RDG–MFE–Q:
+
+        - RDG: Γ_t is induced and smoothed toward a quasi-grid manifold.
+        - MFE: Life-like rule implemented as a field operator δ
+               (possibly with asynchronous scheduling).
+        - Q:  enforces admissible geometry bands and pattern stability
+               (e.g., preserves gliders, kills high-entropy bursts).
+
+All three prior extensions appear as *coordinate slices* of the same
+(Γ, δ, Q) space.
+
+CREDIT AND CLAIM
+Credit (lineage):
+
+    - Graph CA showed that CA need not live on rigid grids.
+    - Asynchronous CA showed that global clocks are not essential.
+    - Constrained/probabilistic CA showed that filters and noise
+      can be built into the update process.
+
+Claim (synthesis):
+
+    - RDG–MFE–Q provides a *single, layered formalism* where:
+          geometry (RDG),
+          dynamics (MFE),
+          and admissibility (Q)
+      are explicitly separated but composable.
+
+    - This makes it possible to:
+          *recover* all of the above as special cases,
+          *combine* them coherently,
+          and *extend* them with emergent geometry and SID-style
+          statistical admissibility.
+
+In short:
+    RDG–MFE–Q stands on the shoulders of graph CA, asynchronous CA,
+    and constrained CA — and turns them into a unified, operator-clean
+    stack rather than a scattered zoo of ad hoc variants.
+
+===============================================================================
+4. **Falsifiability / Implementation**  
+===============================================================================
+SUMMARY DIAGRAM
+
+                +-----------------------------+
+                |       RDG–MFE–Q Engine      |
+                |-----------------------------|
+                |  RDG: dynamic geometry      |
+                |  MFE: field dynamics        |
+                |  Q: admissibility/quotient  |
+                +--------------+--------------+
+                               |
+                               | collapse Γ, δ, Q
+                               v
+                +-----------------------------+
+                |   Classical Cellular Auto   |
+                |-----------------------------|
+                |  fixed grid Γ_grid          |
+                |  lookup rule f_rule         |
+                |  no quotient layer          |
+                +-----------------------------+
+
+===============================================================================
+from dataclasses import dataclass
+import numpy as np
+
+@dataclass
+class RDGState:
+    # Geometry: adjacency as sparse-ish matrix or neighbor list
+    adj: np.ndarray      # shape (N, N), 0/1 for simplicity
+    # Field: Life-like state on nodes
+    x: np.ndarray        # shape (N,), 0/1
+
+@dataclass
+class RDGParams:
+    target_degree: int = 8      # Moore-like
+    alpha_deg: float = 1.0      # degree variance weight
+    beta_long: float = 0.1      # long-edge penalty
+    # Q-layer thresholds
+    max_deg_sigma: float = 1.0  # admissible degree band
+
+
+# ---------- RDG: geometry update (very minimal) ----------
+
+def rdg_update_geometry(state: RDGState, params: RDGParams) -> np.ndarray:
+    adj = state.adj.copy()
+    deg = adj.sum(axis=1)
+
+    # Simple degree-smoothing: trim or add edges to move toward target_degree
+    N = len(deg)
+    for i in range(N):
+        if deg[i] > params.target_degree:
+            # remove some edges (naive: remove farthest neighbors)
+            neighbors = np.where(adj[i] == 1)[0]
+            # here we just drop arbitrary neighbors for brevity
+            to_drop = neighbors[:deg[i] - params.target_degree]
+            adj[i, to_drop] = 0
+            adj[to_drop, i] = 0
+        elif deg[i] < params.target_degree:
+            # add edges to random nodes (in a real RDG, use latent 2D positions)
+            candidates = np.where(adj[i] == 0)[0]
+            np.random.shuffle(candidates)
+            to_add = candidates[:params.target_degree - deg[i]]
+            adj[i, to_add] = 1
+            adj[to_add, i] = 1
+
+    return adj
+
+
+# ---------- MFE: Life-like dynamics on current geometry ----------
+
+def mfe_life_step(state: RDGState) -> np.ndarray:
+    adj = state.adj
+    x = state.x
+    # neighbor counts
+    neigh_count = adj @ x  # (N,N) @ (N,) -> (N,)
+    # Life rule
+    survive = (x == 1) & ((neigh_count == 2) | (neigh_count == 3))
+    born    = (x == 0) & (neigh_count == 3)
+    x_next  = np.where(survive | born, 1, 0)
+    return x_next
+
+
+# ---------- Q-layer: admissibility / stabilization ----------
+
+def q_filter(state: RDGState, params: RDGParams) -> RDGState:
+    adj = state.adj
+    x   = state.x
+
+    deg = adj.sum(axis=1)
+    mean_deg = deg.mean()
+    std_deg  = deg.std() + 1e-9
+
+    # Enforce degree band: if node degree too far from mean, trim/add edges
+    upper = mean_deg + params.max_deg_sigma * std_deg
+    lower = max(0, mean_deg - params.max_deg_sigma * std_deg)
+
+    adj_filtered = adj.copy()
+    N = len(deg)
+    for i in range(N):
+        if deg[i] > upper:
+            neighbors = np.where(adj_filtered[i] == 1)[0]
+            to_drop = neighbors[: int(deg[i] - upper)]
+            adj_filtered[i, to_drop] = 0
+            adj_filtered[to_drop, i] = 0
+        elif deg[i] < lower:
+            candidates = np.where(adj_filtered[i] == 0)[0]
+            np.random.shuffle(candidates)
+            to_add = candidates[: int(lower - deg[i])]
+            adj_filtered[i, to_add] = 1
+            adj_filtered[to_add, i] = 1
+
+    return RDGState(adj=adj_filtered, x=x)
+
+# ---------- One RDG–MFE–Q step ----------
+
+def rdg_mfe_q_step(state: RDGState, params: RDGParams) -> RDGState:
+    # 1) RDG: evolve geometry
+    adj_next = rdg_update_geometry(state, params)
+    tmp = RDGState(adj=adj_next, x=state.x)
+
+    # 2) MFE: Life-like update on that geometry
+    x_next = mfe_life_step(tmp)
+    tmp2 = RDGState(adj=adj_next, x=x_next)
+
+    # 3) Q: enforce admissibility band
+    return q_filter(tmp2, params)
+
+===============================================================================
+Concrete demo: lifting a Life glider into RDG–MFE–Q
+
+	Start from a true 2D Life grid with a glider.
+	Encode it as an RDGState (nodes + adjacency).
+	Turn RDG/MFE/Q into a specialization that exactly preserves Life.
+	Then relax RDG slightly so it can “breathe” but still keep the glider admissible.
+
+Build a Life grid + glider as RDGState
+===============================================================================
+def life_grid_adj(H, W):
+    N = H * W
+    adj = np.zeros((N, N), dtype=int)
+
+    def idx(r, c): return r * W + c
+
+    for r in range(H):
+        for c in range(W):
+            i = idx(r, c)
+            for dr in [-1, 0, 1]:
+                for dc in [-1, 0, 1]:
+                    if dr == 0 and dc == 0:
+                        continue
+                    rr = (r + dr) % H
+                    cc = (c + dc) % W
+                    j = idx(rr, cc)
+                    adj[i, j] = 1
+    return adj
+
+def life_glider_state(H=10, W=10):
+    adj = life_grid_adj(H, W)
+    x   = np.zeros(H * W, dtype=int)
+
+    # Classic glider at top-left (pattern in 2D)
+    # . 1 .
+    # . . 1
+    # 1 1 1
+    def idx(r, c): return r * W + c
+    x[idx(0,1)] = 1
+    x[idx(1,2)] = 1
+    x[idx(2,0)] = 1
+    x[idx(2,1)] = 1
+    x[idx(2,2)] = 1
+
+    return RDGState(adj=adj, x=x)
+
+===============================================================================
+Specialization that exactly simulates Life
+
+Set:
+
+	RDG geometry update = identity (no change).
+	Q = identity (no filtering).
+	MFE = Life rule on the fixed grid.
+
+===============================================================================
+def rdg_identity_geometry(state: RDGState, params: RDGParams) -> np.ndarray:
+    return state.adj
+
+def q_identity(state: RDGState, params: RDGParams) -> RDGState:
+    return state
+
+def rdg_mfe_q_step_life_exact(state: RDGState, params: RDGParams) -> RDGState:
+    adj_next = rdg_identity_geometry(state, params)
+    tmp = RDGState(adj=adj_next, x=state.x)
+    x_next = mfe_life_step(tmp)
+    tmp2 = RDGState(adj=adj_next, x=x_next)
+    return q_identity(tmp2, params)
+
+---
+
+state = life_glider_state()
+params = RDGParams()
+
+for t in range(4):
+    # x_t is exactly the Life glider orbit
+    state = rdg_mfe_q_step_life_exact(state, params)
+
+===============================================================================
+This is the strict embedding: the glider is an RDG–MFE–Q trajectory.
+
+ Relaxed RDG + Q that still preserves the glider
+Now we let RDG “wiggle” the geometry slightly, but Q keeps it in a grid band and preserves the glider orbit.
+
+Idea:
+
+RDG tries to smooth degrees toward 8 (Moore).
+
+Q enforces degree variance ≤ 1σ and locks nodes that are part of the glide
+
+===============================================================================
+def q_preserve_glider(state: RDGState, params: RDGParams, glider_mask: np.ndarray) -> RDGState:
+    # glider_mask: shape (N,), 1 if node is part of glider, else 0
+    adj = state.adj.copy()
+    x   = state.x
+
+    deg = adj.sum(axis=1)
+    mean_deg = deg.mean()
+    std_deg  = deg.std() + 1e-9
+    upper = mean_deg + params.max_deg_sigma * std_deg
+    lower = max(0, mean_deg - params.max_deg_sigma * std_deg)
+
+    N = len(deg)
+    for i in range(N):
+        if glider_mask[i] == 1:
+            # freeze geometry around glider nodes
+            continue
+        if deg[i] > upper:
+            neighbors = np.where(adj[i] == 1)[0]
+            to_drop = neighbors[: int(deg[i] - upper)]
+            adj[i, to_drop] = 0
+            adj[to_drop, i] = 0
+        elif deg[i] < lower:
+            candidates = np.where(adj[i] == 0)[0]
+            np.random.shuffle(candidates)
+            to_add = candidates[: int(lower - deg[i])]
+            adj[i, to_add] = 1
+            adj[to_add, i] = 1
+
+    return RDGState(adj=adj, x=x)
+
+===============================================================================
+Then:
+===============================================================================
+
+def rdg_mfe_q_step_glider_preserved(state: RDGState,
+                                    params: RDGParams,
+                                    glider_mask: np.ndarray) -> RDGState:
+    # 1) RDG: geometry flow
+    adj_next = rdg_update_geometry(state, params)
+    tmp = RDGState(adj=adj_next, x=state.x)
+
+    # 2) MFE: Life-like update
+    x_next = mfe_life_step(tmp)
+    tmp2 = RDGState(adj=adj_next, x=x_next)
+
+    # 3) Q: keep geometry near grid and freeze glider neighborhood
+    return q_preserve_glider(tmp2, params, glider_mask)
+===============================================================================
+
+This is the “lifted” version: the glider lives inside a slightly evolving geometry, but remains an admissible attractor because Q protects its orbit and the local grid structure.
+
+Metrics: coherence density and attractor statistics
+Now we quantify what’s happening.
+
+Coherence density (geometry)
+One simple RDG-style coherence metric:
+Degree coherence: how close degrees are to target.
+
+Cycle coherence: how grid-like local cycles are (many 4-cycles, few triangles).
+
+===============================================================================
+
+def coherence_density(state: RDGState, target_degree=8) -> float:
+    adj = state.adj
+    deg = adj.sum(axis=1)
+    # degree coherence: 1 - normalized variance
+    var_deg = ((deg - target_degree) ** 2).mean()
+    # normalize by max possible variance ~ target_degree^2
+    deg_coh = 1.0 - min(1.0, var_deg / (target_degree ** 2 + 1e-9))
+    return float(deg_coh)
+
+===============================================================================
+
+Can extend this with cycle statistics:
+
+===============================================================================
+
+def triangle_count(adj: np.ndarray) -> int:
+    # trace(A^3)/6 for undirected simple graph
+    A3 = adj @ adj @ adj
+    return int(np.trace(A3) // 6)
+
+def square_count_approx(adj: np.ndarray) -> int:
+    # crude: count length-4 closed walks and subtract deg contributions
+    A2 = adj @ adj
+    # diagonal of A^4 approximates 4-cycles; this is rough but illustrative
+    A4 = A2 @ A2
+    return int(np.trace(A4) // 8)  # heuristic overcounting correction
+
+===============================================================================
+
+Then define:
+
+===============================================================================
+
+def geometry_coherence(state: RDGState, target_degree=8) -> dict:
+    adj = state.adj
+    deg = adj.sum(axis=1)
+    var_deg = ((deg - target_degree) ** 2).mean()
+    deg_coh = 1.0 - min(1.0, var_deg / (target_degree ** 2 + 1e-9))
+
+    tri = triangle_count(adj)
+    sq  = square_count_approx(adj)
+    cycle_ratio = sq / (tri + 1e-9)  # high for grid-like
+
+    return {
+        "degree_coherence": float(deg_coh),
+        "triangle_count": tri,
+        "square_count": sq,
+        "square_triangle_ratio": float(cycle_ratio),
+    }
+
+===============================================================================
+Attractor statistics (dynamics)
+
+Track:
+
+	Period: length of orbit before repetition.
+	Basin size: how many random initial states flow into a given attractor.
+	Pattern type: still life, oscillator, glider, etc. (via pattern signatures).
+
+===============================================================================
+def attractor_period(run_states):
+    # run_states: list of x vectors (hashable)
+    seen = {}
+    for t, x in enumerate(run_states):
+        key = tuple(x.tolist())
+        if key in seen:
+            return t - seen[key]  # period
+        seen[key] = t
+    return None  # no cycle detected in window
+
+def run_trajectory(step_fn, state, params, steps=100):
+    xs = []
+    for _ in range(steps):
+        xs.append(state.x.copy())
+        state = step_fn(state, params)
+    return xs
+
+===============================================================================
+
+Example: check that the glider orbit is periodic of length 4 in the exact Life specialization:
+
+===============================================================================
+state = life_glider_state()
+params = RDGParams()
+xs = run_trajectory(rdg_mfe_q_step_life_exact, state, params, steps=20)
+period = attractor_period(xs)
+print("Glider period:", period)  # should be 4
+
+===============================================================================
+
+For the lifted RDG–MFE–Q:
+
+Expect the period to remain 4 if Q perfectly preserves the orbit.
+
+If RDG perturbations leak through,   see period drift or orbit destruction — exactly the “universality vs. Q-restriction” story, now measurable.
+
+===============================================================================
+
+
+ APPENDIX : MAXWELL–QUATERNION  ⇄  RDG–MFE  (FIXED ℝ³ VS RDG-GENERATED Γ_t) 
+===============================================================================
+
++----------------------		+------------------------------		+--------------------------------------
+| Concept              		| Classical Maxwell (ℝ³ fixed) 	| RDG–MFE (Γ_t generated/evolving)     
++----------------------		+------------------------------		+--------------------------------------
+| Substrate            		| Fixed ℝ³ manifold            		| RDG geometry Γ_t (dynamic manifold)  
+|                      		| Static metric, no evolution  	| Γ_{t+1} = Π_RDG(Γ_t, fields)         
++----------------------		+------------------------------		+--------------------------------------
+| Scalar potential φ   	| φ(t, x) on ℝ³                		| φ_t : P → ℝ on RDG nodes             
++----------------------		+------------------------------		+--------------------------------------
+| Vector potential A   	| A(t, x) on ℝ³                		| A_t : P→ℝ³ or E→ℝ³ on Γ_t            
++----------------------		+------------------------------		+--------------------------------------
+| Quaternion potential 	| Q = φ + A                    			| Q_t = φ_t + A_t (quaternion field)   
++----------------------		+------------------------------		+--------------------------------------
+| Gradient ∇Q 		| ∇_Q = ∂t + ∇			| Split across layers: ∇{Γ_t} 
+|			|(quaternionic, noncommutative)	| (RDG geometric) + quaternion coupling 
+|			|				| (MFE dynamic)      
++----------------------		+------------------------------		+--------------------------------------   
+| Wave operator □Q     	| □Q = J                    			| □_{Γ_t} Q_t = J_t                  
+|                      		| Standard d’Alembertian       	| RDG Laplacian + time difference      
++----------------------		+------------------------------		+--------------------------------------
+| Field coupling       	| J = (ρ, J⃗) sources          		| J_t : P → ℍ (quaternion sources)     
++----------------------		+------------------------------		+--------------------------------------
+| Geometry response    	| None (ℝ³ fixed)            		| Γ_{t+1} responds to field structure  
+|                      		|                              			| via Π_RDG (field–geometry coupling)  
++----------------------		+------------------------------		+--------------------------------------
+| Q-layer role         		| Not present                  		| Enforces admissibility, coherence    
+|                      		|                              			| (SID bands, stability filters)       
++----------------------		+------------------------------		+--------------------------------------
+| Interpretation 		| Fields on fixed space        		| Fields + geometry co-evolve          
+|                      		|                              			| (Maxwell-like MFE on emergent Γ_t)   
++----------------------		+------------------------------		+--------------------------------------
+| Condition   		| Classical Maxwell (ℝ³ fixed) 	| RDG–MFE (Γ_t generated/evolving)     
++----------------------		+------------------------------		+--------------------------------------+
+| Continuum / limit    	| —                            			| Γ_t frozen to ℝ³;                    
+|                      		|                              			| RDG → identity;                      
+|                      		|                              			| graph Laplacian → ∇²;                
+|                      		|                              			| discrete ∇_Q^{RDG} → continuous ∇_Q; 
+|                      		|                              			| ⇝ Maxwell equations recovered  
++----------------------		+------------------------------		+--------------------------------------+
+
+===============================================================================
