@@ -3,6 +3,11 @@ RDG–MFE–Q GENERALIZED CELLULAR AUTOMATA
 
 RDG–MFE–Q as a three-layer generalization that treats Conway's Game of Life and Wolfram-style elementary CA as special cases (fixed-grid, lookup-table, unconstrained). RDG–MFE–Q extends classic CA by injecting generative geometry, field dynamics, and regulated admissibility where they had fixed grids, lookup tables, and zero constraints. It sidesteps their limitations (accidental scale behavior, lack of physicality) and generalizes them as a more abstract engine when the layers are non-degenerate.
 
+Figure 1. Transition from classical cellular automata to Relational Automata Manifolds (RAM).  
+(a) Conway’s Game of Life glider on a fixed lattice.  
+(b) RDG evolution from a random relational graph (Γ₀) to a quasi‑grid manifold (Γ*).  
+(c) Life glider instantiated on the RDG‑induced manifold, demonstrating automata on emergent geometry.
+
 ### Accurate Mapping to Known Systems
 Reduction is formally:
 
