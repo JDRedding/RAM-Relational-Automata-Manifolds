@@ -51,62 +51,8 @@ CA-Extensions-RDG-MFE-Q/
 └── LICENSE
 ```
 
----
 
-## Suggested README.md Outline
 
-````markdown
-# RDG–MFE–Q: Generalized Cellular Automata
-
-RDG–MFE–Q is a **three‑layer generalization** of classical cellular automata:
-
-- **RDG** — Relational Dynamic Geometry  
-- **MFE** — Momentum‑Flux Engine (field dynamics)  
-- **Q** — Quotient / Admissibility (SID stability)
-
-Classic CA (Life, Rule 110, Wolfram ECA) appear as the degenerate case:
-
-```
-Γ_t = Γ_grid  
-δ = f_rule  
-Q = id  
-```
-
-This repository contains:
-
-- A formal reduction of CA → RDG–MFE–Q  
-- A universality theorem (glider embedding)  
-- Emergent geometry demos (RDG induces quasi‑2D grids)  
-- Minimal Python implementations  
-- A Maxwell–Quaternion appendix showing how MFE generalizes field dynamics  
-
----
-
-## Highlights
-
-### ✔ Strict containment  
-RDG–MFE–Q strictly extends CA:
-
-```
-Classic CA ⊂ Graph CA ⊂ Async CA ⊂ Constrained CA ⊂ RDG–MFE–Q
-```
-
-### ✔ Universality preserved  
-Life’s glider orbit `{g0,g1,g2,g3}` embeds as an admissible RDG–MFE–Q trajectory when:
-
-```
-Q(gk) = gk   for k = 0..3
-```
-
-### ✔ Emergent manifolds  
-RDG induces quasi‑2D grids from random graphs, enabling Life‑like attractors.
-
-### ✔ Minimal working code  
-Includes:
-
-- exact Life specialization  
-- RDG‑perturbed geometry with Q‑preserved glider  
-- coherence metrics (degree variance, cycle ratios)
 
 ---
 
