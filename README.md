@@ -1,5 +1,5 @@
 # RAM-Relational-Automata-Manifolds
-# RDG–MFE–Q: Generalized Cellular Automata  
+## RDG–MFE–Q: Generalized Cellular Automata  
 *A strict extension of Conway’s Life, Wolfram CA, graph CA, asynchronous CA, and constrained CA*
 
 This repository contains the theory, proofs, demos, and minimal Python implementations showing how **RDG–MFE–Q** strictly generalizes classical cellular automata by adding:
