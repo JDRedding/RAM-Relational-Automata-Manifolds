@@ -25,17 +25,32 @@ CA-Extensions-RDG-MFE-Q/
 │
 ├── README.md
 │   ├── Overview
-│   ├── Classic CA → RDG–MFE–Q reduction
-│   ├── Why RDG–MFE–Q strictly generalizes CA
-│   ├── Glider embedding theorem
-│   ├── Emergent geometry demo
-│   └── Maxwell–Quaternion appendix
+│   ├── Classic CA → RDG–MFE–Q Reduction
+│   ├── Why RDG–MFE–Q Strictly Generalizes CA
+│   ├── Glider Embedding Theorem
+│   ├── Emergent Geometry Demo
+│   └── Maxwell–Quaternion Appendix
 │
 ├── theory/
-│   ├── RDG-MFE-Q_CA_Generalization.md
+│   ├── RDG_MFE_Q_CA_Generalization.md
 │   ├── Universality_Theorem.md
 │   ├── Emergent_Manifolds.md
 │   └── Maxwell_Quaternion_Appendix.md
+│
+├── rdg/                     # Geometry layer
+│   ├── rdg_generators.md
+│   ├── rdg_relations.md
+│   └── rdg_examples.md
+│
+├── mfe/                     # Field-dynamics layer
+│   ├── mfe_life.md
+│   ├── mfe_maxwell.md
+│   └── mfe_pde_extensions.md
+│
+├── q_layer/                 # Admissibility / SID / quotienting
+│   ├── admissibility_axioms.md
+│   ├── SID_stability.md
+│   └── quotienting_rules.md
 │
 ├── code/
 │   ├── rdg_mfe_q_minimal.py
@@ -49,4 +64,5 @@ CA-Extensions-RDG-MFE-Q/
 │   └── emergent_grid/
 │
 └── LICENSE
+
 ```
