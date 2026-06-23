@@ -1,0 +1,125 @@
+RAM CORE SUMMARY — MANIFOLD / OPERATOR / INVARIANT STACK
+──────────────────────────────────────────────────────────────────────────────
+
+1. BASE MANIFOLD
+──────────────────────────────────────────────────────────────────────────────
+M            : discrete space (graph, lattice, torus, sheet, etc.)
+Adj          : adjacency stencil / neighborhood operator
+σ : M → S    : state field (S = finite symbol set)
+
+Support operator:
+S(i) = Σ_{δ∈Adj} σ(i+δ)
+
+──────────────────────────────────────────────────────────────────────────────
+2. RDG LAYER — STRUCTURE / INTERACTION / DYNAMICS
+──────────────────────────────────────────────────────────────────────────────
+Structure:     (M, Adj)
+Interaction:   S(i) = local aggregation
+Dynamics:      local update determined by Q-layer condition
+
+Dimensional selector:
+dim(i) = f(Adj, local geometry)
+stable_dims ⊂ ℕ
+
+──────────────────────────────────────────────────────────────────────────────
+3. MFE LAYER — DEFICIT / EXCESS / STRAIN
+──────────────────────────────────────────────────────────────────────────────
+Capacity functional:
+C(i) = C_base(σ(i))
+
+Deficit:
+D(i) = max( L_min − S(i), 0 )
+
+Excess:
+E(i) = max( S(i) − C(i), 0 )
+
+Strain:
+ψ(i) = E(i) − D(i)
+
+Channel classification:
+Ch_k = { i : S(i) = k }
+
+──────────────────────────────────────────────────────────────────────────────
+4. Q-LAYER — HYSTERETIC UPDATE CONDITION
+──────────────────────────────────────────────────────────────────────────────
+Update rule:
+σ'(i) = U(σ)(i)
+
+Generic Q-condition:
+σ'(i) = 1  ⇔  ψ(i) = 0  and  S(i) ∈ allowed_window(σ(i))
+
+Birth window:     W_B ⊂ ℕ
+Survival window:  W_S ⊂ ℕ
+
+Model tags:
+Model = { Raw, Prime, Custom }
+χ_B(k), χ_S(k) = birth/survival indicators for channel k
+
+──────────────────────────────────────────────────────────────────────────────
+5. DEFECT CALCULUS (ARBITRARY SUBMANIFOLDS)
+──────────────────────────────────────────────────────────────────────────────
+Given defect mask Ω ⊂ M_sub:
+
+Open-neighbor count:
+q(u) = |Ω ∩ Open(u)|
+
+Closed-neighbor count:
+r(u) = |Ω ∩ Closed(u)|
+
+One-step dilation:
+Dil₁(Ω) = { u : r(u) > 0 }
+
+Model-tagged response:
+Births:
+B(Ω) = Σ_{u∈Ω} χ_B( local_channel(u) )
+       + Σ_{u∈Dil₁(Ω)} χ_B( halo_channel(u) )
+
+Deaths:
+D(Ω) = Σ_{u∈Dil₁(Ω)\Ω} [1 − χ_S( local_channel(u) )]
+
+──────────────────────────────────────────────────────────────────────────────
+6. INVARIANTS
+──────────────────────────────────────────────────────────────────────────────
+Geometric invariants:
+Inv_dim(M)         = stable dimensional classes
+Inv_sym(M)         = symmetry group
+
+Graph invariants:
+Inv_deg(σ)         = degree bounds for active graph
+Inv_conn(σ)        = connectivity class
+
+Channel invariants:
+Inv_channels(σ)    = { |Ch_k| : k ∈ ℕ }
+
+Energy / strain invariants:
+Weight I_k         = log₂(k) + const
+Work:
+W(σ) = Σ_k I_k · |Ch_k|
+
+Defect invariants:
+Inv_defect(Ω)      = (q,r,Dil₁) structure class
+
+──────────────────────────────────────────────────────────────────────────────
+7. RAM UPDATE PIPELINE
+──────────────────────────────────────────────────────────────────────────────
+Step 1: Support aggregation
+        S(i) = Σ_{δ∈Adj} σ(i+δ)
+
+Step 2: Capacity + strain
+        C(i), D(i), E(i), ψ(i)
+
+Step 3: Q-condition
+        σ'(i) = 1{ ψ(i)=0 and S(i) ∈ W(σ(i)) }
+
+Step 4: Defect pass (if submanifold present)
+        compute q,r,Dil₁ and apply model-tagged selector
+
+Step 5: Diagnostics
+        channel counts, work, churn
+
+Step 6: Advance
+        σ ← σ'
+
+──────────────────────────────────────────────────────────────────────────────
+END RAM CORE SUMMARY
+──────────────────────────────────────────────────────────────────────────────
